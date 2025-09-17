@@ -2,15 +2,6 @@ const nav = document.querySelector("nav");
 const search = document.querySelector(".search");
 const settings = document.querySelector(".settings");
 
-
-
-
-
-
-
-
-
-
 const searchCTA = document.querySelector(".search-cta");
 const advancedSearch = document.querySelector(".advanced-search");
 const advImg = advancedSearch.querySelector(".img");
