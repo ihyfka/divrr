@@ -1,6 +1,8 @@
 const nav = document.querySelector("nav");
 const search = document.querySelector(".search");
 const settings = document.querySelector(".settings");
+const settingContainer = document.querySelector(".settings-container");
+const backSettings = document.querySelector(".setting-back");
 
 const searchCTA = document.querySelector(".search-cta");
 const advancedSearch = document.querySelector(".advanced-search");
@@ -16,14 +18,15 @@ const songTabActive = document.querySelector(".song-bottom-design");
 const needPremiumService = document.querySelectorAll(".need-premium");
 
 const main = document.querySelector(".main");
-
 const goAway = document.querySelectorAll(".goaway");
 const musicChoice = document.querySelectorAll(".index-overview");
+const indexedCurrentSong = document.querySelector(".index-song-title");
 const container = document.querySelector(".container");
 
 const audioSet = document.querySelector(".audio-set");
 const thumbnail = document.querySelector(".nowplaying-thumbnail");
 const songTitle = document.querySelector(".song-title");
+
 const timeline = document.querySelector(".timeline");
 const dynamicTime = document.querySelector(".current-time");
 const songDuration = document.querySelector(".song-duration");
@@ -49,6 +52,7 @@ const activePlayBtn = document.querySelector(".active-play-svg");
 const activePauseBtn = document.querySelector(".active-pause-svg");
 const activeGoForwards = document.querySelector(".active-forwards-svg");
 
+
 //toggle advSearch tab
 let isEnabled = false;
 function enabled(){
@@ -61,7 +65,6 @@ function enabled(){
 function disabled(){
   isEnabled = false;
   advancedSearch.style.display = "none";
-  searchCTA.style.display = "none";
   section.style.display = "flex";
   main.style.opacity = "1";
   footer.style.opacity = "1";
@@ -74,17 +77,15 @@ search.addEventListener("click", (e)=>{
 document.addEventListener("click", (e)=>{
   e.stopPropagation();
   advInput.removeAttribute("readonly", "true");
-  if(!advancedSearch.contains(e.target) && search !== e.target){
+  if(!advancedSearch.contains(e.target) && !settingContainer.contains(e.target)){  //&& !settings.contains(e.target)*/ && !settingContainer.contains(e.target)){
     advInput.value = "";
     disabled();
   }
 })
 
 
+
 //free-tier search negation
-function premiumSearchHelper(){
-  searchCTA.style.display = "block";
-}
 advInput.addEventListener("input", ()=>{
   if(advInput.value !== ""){
     for(i=0;i<inpFakeShots.length;i++){
@@ -96,12 +97,13 @@ advInput.addEventListener("input", ()=>{
     for(i=0;i<inpFakeShots.length;i++){
       inpFakeShots[i].style.display = "none";
     }
-    searchCTA.style.position = "fixed";
-    searchCTA.style.top = "10%";
+    searchCTA.style.position = "absolute";
+    searchCTA.style.top = "0";
     searchCTA.style.width = "100%";
  
     advancedSearch.style.position = "fixed";
-    advancedSearch.style.top = "15%";
+    advancedSearch.style.top = "13%";
+    advancedSearch.style.height = "57vh";
     advancedSearch.style.width = "95%";
     setTimeout(()=>{
       searchCTA.style.display = "block";
@@ -111,6 +113,52 @@ advInput.addEventListener("input", ()=>{
     }, 300)
   }
 })
+
+
+
+//settings
+function checkAudioPlaying(){
+  if(!audioSet.paused && !audioSet.ended){
+    footer.style.display = "block";
+  }else{
+    footer.style.display = "none";
+  }
+}
+    //opening settings
+function intoSettings(){
+  nav.style.display = "none";
+  settingContainer.classList.add("serrings");
+  settingContainer.addEventListener("animationend", ()=>{
+    section.style.display = "none";
+    main.style.display = "none";
+  })
+}
+settings.addEventListener("click", ()=>{
+  intoSettings();
+  history.pushState({
+      activeSettingsContainer:true
+    }, "")
+})
+    //leaving settings
+function outtaSettings(){
+  nav.style.display = "";
+  settingContainer.classList.remove("serrings");
+  main.style.display = "grid";
+  section.style.display = "flex"
+  checkAudioPlaying();
+}
+backSettings.addEventListener("click", outtaSettings)
+window.addEventListener("popstate", (e)=>{
+  if(e.state && e.state.activeSettingsContainer){
+    // basically do nothing but if u want to...
+    //reopen container on click;
+    intoSettings();
+  }else{
+    //minimize container
+    outtaSettings();
+  }
+})
+
 
 
 //songTab
@@ -125,6 +173,7 @@ document.addEventListener("click", (e)=>{
   songTabActive.classList.add("tabActive");
   e.stopPropagation();
 })
+
 
 
 //container animation
@@ -143,6 +192,7 @@ function madeChoiceAlready(){
   container.style.bottom = "0";
   footer.style.display = "none";
 }
+
 
 
 //adding favourites
@@ -165,6 +215,22 @@ if(liked){
 
 
 
+//now playing text
+let isPlaying = false;
+if(!isPlaying) nowPlaying();
+function nowPlaying(){
+  musicChoice.forEach((song)=>{
+    song.addEventListener("click", function(e){
+      musicChoice.forEach((songToPlay)=>{
+        songToPlay.childNodes[3].childNodes[1].classList.remove("song-currently-on");
+      })  
+      this.childNodes[3].childNodes[1].classList.add("song-currently-on");
+    })
+  })
+}
+
+
+
 //picking music
 let track_index = null;
 for(let i=0;i<musicChoice.length;i++){
@@ -173,6 +239,7 @@ for(let i=0;i<musicChoice.length;i++){
     songTabActive.classList.add("tabActive");
     madeChoiceAlready();
     track_index = i;
+    isPlaying = true; //musicChoice[track_index].childNodes[3].childNodes[1].style.fontSize = "3rem";
     nowPlayingDataId = music[i].id || i;
     thumbnail.childNodes[1].src = music[i].thumbnail;
     songTitle.textContent = music[i].name;
@@ -202,17 +269,17 @@ for(let i=0;i<musicChoice.length;i++){
 }
 
 
+
 //leaving the container
 function pickedMusicAlready(){
   goAway.forEach((component)=>{
     component.classList.remove("inactive");
   })
+  isPlaying = true; //song.childNodes[3].childNodes[1].classList.remove("song-currently-on");
   container.classList.remove("active");
   container.classList.add("minimize");
-  footer.style.display = "block";
   setTimeout(()=>{
     container.style.display = "none";
-    footer.style.display = "block";
   }, 500)
 }
 window.addEventListener("popstate", (e)=>{
@@ -234,6 +301,7 @@ for(i=0;i<footerReopen.length;i++){
     }, "")
   }
 )}
+
 
 
 //toggle container play/pause/nav icons
@@ -267,7 +335,10 @@ function nextTrack(index){
     }
   }else{
     track_index++;
-    loadLoveState(track_index)
+    
+    isPlaying = false; //nowPlaying(track_index)
+    
+    loadLoveState(track_index);
     music[index] = music[track_index];
     thumbnail.childNodes[1].src = music[track_index].thumbnail;
     songTitle.textContent = music[track_index].name;
@@ -287,7 +358,10 @@ goForwards.addEventListener("click", nextTrack);
 function prevTrack(index){
   if(track_index > 0){
     track_index -= 1;
-    loadLoveState(track_index)
+    
+    isPlaying = false; //nowPlaying(track_index);
+    
+    loadLoveState(track_index);
     music[index] = music[track_index];
     thumbnail.childNodes[1].src = music[track_index].thumbnail;
     songTitle.textContent = music[track_index].name;
@@ -304,6 +378,7 @@ function prevTrack(index){
   }
 }
 goBackwards.addEventListener("click", prevTrack);
+
 
 
 //update timer
