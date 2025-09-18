@@ -41,7 +41,7 @@ const pause = document.querySelectorAll(".pause");
 const playBtn = document.querySelector(".play-svg");
 const pauseBtn = document.querySelector(".pause-svg");
 const goForwards = document.querySelector(".forwards-svg");
-const LyricsBtn = document.querySelector(".container-options");
+const lyricsBtn = document.querySelector(".container-options");
 
 const footer = document.querySelector("footer");
 const footerReopen = document.querySelectorAll(".footer-reopen");
