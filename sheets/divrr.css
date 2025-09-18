@@ -8,7 +8,7 @@ html{font-size:62.5%;}
   --heading:'Trebuchet MS', sans-serif;
   --mainText:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   --normalText:'Lucida Grande', 'Lucida Sans Unicode', Geneva;
-  --activeSecBtn:#28fa;
+  --activeSecBtn:#28f;
   --bg:#5a5a5a4f;  
 }
 body{
@@ -38,8 +38,8 @@ nav span{
 }
 .search-cta{
   display:none;
-  min-height:4%;
-  margin:0 0 .5rem;
+  height:7%;
+  margin:0 0;
   align-content:center;
   text-align:center;
   font-size:1.3rem;
@@ -50,15 +50,15 @@ nav span{
 }
 .advanced-search{
   position:absolute;
-  top:20%;
+  top:17%;
   display:none;
   flex-direction:column;
   justify-self:center;
-  align-content:center;
-  width:85%;
+  height:50vh;
+  width:83%;
   border-radius:1rem;
   background:#030303;
-  z-index:15;
+  z-index:5;
 }
 .advanced-search::before{
   content:"";
@@ -72,7 +72,7 @@ nav span{
 .advanced-search .img{
   display:none;
   align-self:center;
-  width:60%;
+  width:80%;
   height:60%;
   border-radius:1rem;
 }
@@ -108,7 +108,7 @@ nav span{
 .adv-search-input{
   height:5rem;
   width:80%;
-  margin:10% 0 20% 10%;
+  margin:10% 0 17% 10%;
   padding:.7rem;
   padding-left:1.3rem;
   color:#fff;
@@ -121,37 +121,53 @@ nav span{
 }
 .adv-search-input:focus{
   border:none;
-  outline:1px solid #55aa;
+  outline:1px solid #1af7;
 }
 button{
   display:none;
   width:50%;
   align-self:center;
-  margin-bottom:2.5rem;
+  margin-bottom:5rem;
   padding:1rem 1.3rem;
-  font-size:1.5rem;
+  font-size:1.7rem;
   font-weight:700;
   font-family:var(--mainText);
   border:none;
   border-radius:1rem;
   color:#ccc;
-  background:linear-gradient(45deg,#5d6ff4aa,#444fe498,#001320);
+  background:linear-gradient(45deg,#3d4ff4aa,#28fc);
 }
 .advanced-search span{
   margin-bottom:1.5rem;
   text-align:center;
+  justify-items:right;
   font-family:var(--heading);
   font-size:1rem;
   color:#fff;
 }
 
 .settings-container{
-  display:flex;
+  display:none;
   flex-direction:column;
   align-content:center;
+  width:100%;
   padding:0 1rem 1.5rem;
   color:#fff;
-  width:100%;
+  z-index:7;
+}
+.serrings{
+  display:flex;
+  animation:settingActive .3s forwards ease-in-out;
+}
+@keyframes settingActive{
+  from{
+    transform:translateX(100%);
+    opacity:0;
+  }to{
+    display:flex;
+    transform:translateX(0);
+    opacity:1;
+  }
 }
 .setting-back-header{
   position:sticky;
@@ -160,9 +176,13 @@ button{
   background:#080808;
 }
 .setting-back{
-  padding:.7rem;
+  display:flex;
+  padding:1rem;
+  padding-left:.7rem;
   aspect-ratio:1;
   width:min-content;
+  justify-content:center;
+  align-items:center;
   border-radius:50%;
   background:#7773;
 }
@@ -222,47 +242,35 @@ button{
   border-bottom:inherit;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 section{
   position:sticky;
+  top:0;
   display:flex;
   align-items:center;
   justify-content:space-around;
   margin-top:.3rem;
-  padding:1.3rem .7rem .5rem;
+  padding:1.3rem .7rem;
   overflow-x:auto;
   scroll-snap-type:x;
   scroll-behavior:smooth;
   scrollbar-width:none;
+  background:inherit;
 }
 section div:nth-child(1){
   margin-left:1rem;
 }
 section div:nth-child(1),section div:nth-child(2),section div:nth-child(4),section div:nth-child(5),section div:nth-child(6){
-  background:linear-gradient(45deg,#1e609155,#76c8933f);/*#0f252e,#7737);*/
+  background:#7773;
 }
 .explore,.mix,.songs,.liked,.playlist,.folder{
   margin-right:1rem;
-  padding:.75rem 1rem;
+  padding:.9rem 1.3rem;
   border-radius:2rem;
   scroll-snap-align:end;
 }
 .explore:hover,.mix:hover,.liked:hover,.playlist:hover,
 .folder:hover{
-  background:#0f5299;
+  background:linear-gradient(45deg,#28fc,#16b);
 }
 .explore,.liked{
   display:flex;
@@ -285,7 +293,7 @@ section div:nth-child(1),section div:nth-child(2),section div:nth-child(4),secti
   position:absolute;
   left:0;
   bottom:3%;
-  background:#1160b4;
+  background:#28f;
   height:3px;
 }
 .tabActive{
@@ -302,7 +310,7 @@ section div:nth-child(1),section div:nth-child(2),section div:nth-child(4),secti
 section span{
   font-size:1.5rem;
   font-family:var(--normalText);
-  color:#dedede;
+  color:#ccc;
 }
 .main{
   padding:0 2rem;
@@ -324,6 +332,7 @@ section span{
   aspect-ratio:1;
   width:6rem;
   height:6rem;
+  object-fit:contain;
   border-radius:1.3rem;
 }
 .index-details{
@@ -340,6 +349,10 @@ section span{
   font-family:var(--mainText);
   font-weight:bold;
 }
+.song-currently-on{
+  color:#3af;
+}
+
 .index-song-artiste{
   font-size:1.5rem;
   font-family:var(--normalText);
@@ -589,3 +602,8 @@ footer{
     opacity:1;
   }
 }
+
+
+
+
+/*@media screen and (max-width:425px){}*/
