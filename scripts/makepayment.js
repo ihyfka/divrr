@@ -43,7 +43,7 @@ tick.addEventListener("change", function(){
 //proceeding
 btn.addEventListener("click", ()=>{
   setTimeout(()=>{
-    location.replace("/index.html");
+    location.replace("index.html");
   }, 7000)
-
 })
+
