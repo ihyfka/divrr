@@ -32,6 +32,44 @@ body{
   border-radius:50%;
   background:#7773;
 }
+
+.loading{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  display:none;
+  flex-direction:column;
+  padding:0 2rem;
+  width:100%;
+  text-align:center;
+  align-items:center;
+  font-family:var(--mainText);
+  z-index:7;
+}
+.process{
+  animation: process 2s ease-in-out infinite;
+}
+@keyframes process{
+  from{
+    transform:rotate(0deg);
+  }to{
+    transform:rotate(360deg);
+  }
+}
+.message{
+  margin:1.7% 0;
+  font-size:2.3rem;
+  font-weight:700;
+}
+.notif{
+  margin:1.9% 10%;
+  font-size:1.7rem;
+}
+.redirect{
+  display:none;
+}
+
 p{
   margin:1.7rem 1.3rem 2rem;
   font-size:2.5rem;
@@ -162,4 +200,5 @@ button:hover{
     transform:translateY(0);
     opacity:1;
   }
+
 }
