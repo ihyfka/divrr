@@ -57,7 +57,7 @@ const activeGoForwards = document.querySelector(".active-forwards-svg");
 for(l=0;l<needPremiumService.length;l++){
   needPremiumService[l].addEventListener("click", ()=>{
     setTimeout(()=>{
-      window.open("/markupL/getpremium.html"); 
+      window.open("/markupl/getpremium.html"); 
     }, 300)
   })
 }
@@ -445,4 +445,5 @@ setInterval(()=>{
   alert("Local Cache is being cleared frequently to aid device resource allocation optimization :)")
   localStorage.clear();
 }, 7200000)
+
 
