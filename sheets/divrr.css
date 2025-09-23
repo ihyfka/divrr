@@ -200,7 +200,7 @@ button{
   gap:5%;
   margin-bottom:5rem;
 }
-.themecontainer,.backupcontainer,.timercontainer{
+.themecontainer,.backupcontainer,.timercontainer,.equalizercontainer{
   margin-bottom:5%;
   padding:1.3rem;
   border-radius:2rem;
@@ -602,6 +602,7 @@ footer{
     opacity:1;
   }
 }
+
 
 
 
