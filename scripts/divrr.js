@@ -445,5 +445,3 @@ setInterval(()=>{
   alert("Local Cache is being cleared frequently to aid device resource allocation optimization :)")
   localStorage.clear();
 }, 7200000)
-
-

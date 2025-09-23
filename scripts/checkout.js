@@ -16,6 +16,4 @@ btn.addEventListener("click", ()=>{
   setTimeout(()=>{
     location.href = "/markupl/makepayment.html";
   }, 300)
-
 })
-

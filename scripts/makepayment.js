@@ -45,6 +45,4 @@ btn.addEventListener("click", ()=>{
   setTimeout(()=>{
     location.replace("/index.html");
   }, 7000)
-
 })
-
