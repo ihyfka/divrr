@@ -43,7 +43,7 @@ paidDiv.addEventListener("click", ()=>{
 btn.addEventListener("click", ()=>{
   if(free){
     setTimeout(()=>{
-      location.replace("../index.html");
+      location.replace("./index.html");
     }, 300)
   }else{
     //nav to checkout.
@@ -52,5 +52,6 @@ btn.addEventListener("click", ()=>{
     }, 300)
   }
 })
+
 
 
