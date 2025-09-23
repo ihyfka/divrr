@@ -43,12 +43,13 @@ paidDiv.addEventListener("click", ()=>{
 btn.addEventListener("click", ()=>{
   if(free){
     setTimeout(()=>{
-      location.replace("../index.html");
+      location.replace("/index.html");
     }, 300)
   }else{
     //nav to checkout.
     setTimeout(()=>{
-      location.href = "../markupL/checkout.html";
+      location.href = "/markupL/checkout.html";
     }, 300)
   }
+
 })
