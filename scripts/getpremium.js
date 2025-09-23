@@ -48,8 +48,8 @@ btn.addEventListener("click", ()=>{
   }else{
     //nav to checkout.
     setTimeout(()=>{
-      location.href = "/markupL/checkout.html";
+      location.href = "/markupl/checkout.html";
     }, 300)
   }
-
 })
+
