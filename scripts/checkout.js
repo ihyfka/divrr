@@ -5,7 +5,7 @@ const btn = document.querySelector("button");
 //going back
 back.addEventListener("click", ()=>{
   setTimeout(()=>{
-    location.href = "markupl/getpremium.html";
+    location.href = "getpremium.html";
   }, 300)
 })
 
@@ -14,7 +14,8 @@ back.addEventListener("click", ()=>{
 //proceeding
 btn.addEventListener("click", ()=>{
   setTimeout(()=>{
-    location.href = "markupl/makepayment.html";
+    location.href = "makepayment.html";
   }, 300)
 
 })
+
