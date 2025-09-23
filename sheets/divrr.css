@@ -148,6 +148,7 @@ button{
 .settings-container{
   display:none;
   flex-direction:column;
+  justify-content:center;
   align-content:center;
   width:100%;
   padding:0 1rem 1.5rem;
@@ -602,6 +603,7 @@ footer{
     opacity:1;
   }
 }
+
 
 
 
