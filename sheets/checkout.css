@@ -1,0 +1,148 @@
+html{font-size:62.5%;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+:root{
+  --heading:'Trebuchet MS', sans-serif;
+  --mainText:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --normalText:'Lucida Grande', 'Lucida Sans Unicode', Geneva;
+  --activeSecBtn:#28f;
+}
+body{
+  background:#080808;
+  max-width:100%;
+  height:100vh;
+}
+.checkout-container{
+  display:flex;
+  flex-direction:column;
+  align-content:center;
+  justify-content:space-around;
+  width:100%;
+  height:100vh;
+  padding:0 1rem 1.5rem;
+  color:#fff;
+  z-index:3;
+}
+.nav-header{
+  position:sticky;
+  top:0;
+  padding:.7rem 0;
+  background:#080808;
+}
+.svg-container{
+  display:flex;
+  padding:1rem;
+  padding-left:.7rem;
+  aspect-ratio:1;
+  width:min-content;
+  justify-content:center;
+  align-items:center;
+  border-radius:50%;
+  background:#7773;
+}
+.page-relevance{
+  margin:1.7rem 1.3rem 2.5rem;
+  font-size:2.5rem;
+  font-weight:900;
+  font-family:var(--heading);
+}
+.details{
+  align-self:center;
+  width:90%;
+  font-family:var(--mainText);
+  border-radius:1rem;
+}
+.item,.subtotal{
+  display:flex;
+  align-items:center;
+  margin:3% 0;
+  padding:1.3rem;
+  border:none;
+  border-radius:1rem;
+  background:#5a5a5a4f;
+}
+.item .name{
+  margin:3% 0;
+  flex:1;
+}
+.item .name,.item .content{
+  font-size:1.3rem;
+  color:#ccc;
+}
+.subtotal{
+  margin:0;
+  padding:.7rem 1.3rem;
+  background:none;
+}
+.subtotal .name{
+  margin:0;
+  flex:1;
+}
+.subtotal .name,.subtotal .content{
+  font-size:1.7rem;
+  font-weight:550;
+  color:#aaa;
+}
+.total{
+  display:flex;
+  align-items:center;
+  margin:7% 0;
+  padding:1.3rem;
+  border-top:1px solid pink;
+}
+.total .name{
+  margin:3% 0;
+  flex:1;
+}
+.total .name,.total .content{
+  font-size:2rem;
+  font-weight:600;
+  color:#fff;
+}
+p{
+  margin:1.7rem 1.3rem 2.7rem;
+  font-size:2.5rem;
+  font-weight:900;
+  font-family:var(--heading);
+}
+.payment{
+  position:relative;
+  display:flex;
+  align-items:center;
+  margin-bottom:15%;
+  padding:1.3rem;
+  width:100%;
+  border:1px solid #18fc;
+  border-radius:1rem;
+  background:#5a5a5a4f;
+}
+.payment svg{
+  margin-right:5%;
+}
+.payment span{
+  font-size:1.7rem;
+}
+.parent{
+  position:absolute;
+  right:5%;
+  width:1.5rem;
+  aspect-ratio:1;
+  border:4px solid #fff;
+  border-radius:50%;
+  background:#18f;
+}
+button{
+  width:80%;
+  margin:3rem auto 5rem;
+  padding:1.3rem;
+  font-size:1.7rem;
+  font-weight:700;
+  font-family:var(--mainText);
+  border:none;
+  border-radius:1rem;
+  color:#ccc;
+  background:linear-gradient(45deg,#3d4ff490,#18fa);
+}

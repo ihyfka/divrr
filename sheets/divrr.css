@@ -54,7 +54,6 @@ nav span{
   display:none;
   flex-direction:column;
   justify-self:center;
-  height:50vh;
   width:83%;
   border-radius:1rem;
   background:#030303;
@@ -125,10 +124,10 @@ nav span{
 }
 button{
   display:none;
-  width:50%;
+  width:75%;
   align-self:center;
   margin-bottom:5rem;
-  padding:1rem 1.3rem;
+  padding:1.3rem;
   font-size:1.7rem;
   font-weight:700;
   font-family:var(--mainText);
@@ -588,6 +587,7 @@ footer{
   from{
     transform:translateY(0);
   }to{
+    /*display:none;*/
     transform:translateY(100%);
   }
 }

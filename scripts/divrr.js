@@ -20,7 +20,7 @@ const needPremiumService = document.querySelectorAll(".need-premium");
 const main = document.querySelector(".main");
 const goAway = document.querySelectorAll(".goaway");
 const musicChoice = document.querySelectorAll(".index-overview");
-const indexedCurrentSong = document.querySelector(".index-song-title");
+const indexedCurrentSong = document.querySelectorAll(".index-song-title");
 const container = document.querySelector(".container");
 
 const audioSet = document.querySelector(".audio-set");
@@ -53,6 +53,17 @@ const activePauseBtn = document.querySelector(".active-pause-svg");
 const activeGoForwards = document.querySelector(".active-forwards-svg");
 
 
+//handling premium
+for(l=0;l<needPremiumService.length;l++){
+  needPremiumService[l].addEventListener("click", ()=>{
+    setTimeout(()=>{
+      window.open("../markupL/getpremium.html"); 
+    }, 300)
+  })
+}
+
+
+
 //toggle advSearch tab
 let isEnabled = false;
 function enabled(){
@@ -75,7 +86,7 @@ search.addEventListener("click", (e)=>{
   isEnabled ? disabled() : enabled();
 })
 document.addEventListener("click", (e)=>{
-  e.stopPropagation();
+  //e.stopPropagation();
   advInput.removeAttribute("readonly", "true");
   if(!advancedSearch.contains(e.target) && !settingContainer.contains(e.target)){  //&& !settings.contains(e.target)*/ && !settingContainer.contains(e.target)){
     advInput.value = "";
@@ -135,6 +146,11 @@ function intoSettings(){
 }
 settings.addEventListener("click", ()=>{
   intoSettings();
+  
+  /*history.replaceState({
+    activeSettingsContainer:true
+  }, "")*/
+  
   history.pushState({
       activeSettingsContainer:true
     }, "")
@@ -146,13 +162,21 @@ function outtaSettings(){
   main.style.display = "grid";
   section.style.display = "flex"
   checkAudioPlaying();
+  
+  /*history.replaceState({
+    activeSettingsContainer:true
+  }, "")*/
+  
 }
-backSettings.addEventListener("click", outtaSettings)
+backSettings.addEventListener("click", outtaSettings);
+
+
+
 window.addEventListener("popstate", (e)=>{
   if(e.state && e.state.activeSettingsContainer){
     // basically do nothing but if u want to...
     //reopen container on click;
-    intoSettings();
+    //intoSettings();
   }else{
     //minimize container
     outtaSettings();
@@ -215,17 +239,15 @@ if(liked){
 
 
 
-//now playing text
-let isPlaying = false;
-if(!isPlaying) nowPlaying();
+//now playing highlighted
 function nowPlaying(){
-  musicChoice.forEach((song)=>{
-    song.addEventListener("click", function(e){
-      musicChoice.forEach((songToPlay)=>{
-        songToPlay.childNodes[3].childNodes[1].classList.remove("song-currently-on");
-      })  
-      this.childNodes[3].childNodes[1].classList.add("song-currently-on");
-    })
+  const choiceMusic = Array.from(document.querySelectorAll(".index-overview"));
+  choiceMusic.forEach((song, indx)=>{
+    if(indx === isPlayingIndex){
+      song.childNodes[3].childNodes[1].classList.add("song-currently-on");
+    }else{
+      song.childNodes[3].childNodes[1].classList.remove("song-currently-on");
+    }
   })
 }
 
@@ -237,9 +259,12 @@ for(let i=0;i<musicChoice.length;i++){
   musicChoice[i].addEventListener("click",(e)=>{
     if(isEnabled) return;
     songTabActive.classList.add("tabActive");
-    madeChoiceAlready();
+    
+    if(main.contains(e.target)) madeChoiceAlready();
+    
     track_index = i;
-    isPlaying = true; //musicChoice[track_index].childNodes[3].childNodes[1].style.fontSize = "3rem";
+    isPlayingIndex = track_index;
+    nowPlaying();
     nowPlayingDataId = music[i].id || i;
     thumbnail.childNodes[1].src = music[i].thumbnail;
     songTitle.textContent = music[i].name;
@@ -252,7 +277,7 @@ for(let i=0;i<musicChoice.length;i++){
     footerSongTitle.textContent = music[i].name;
     footerArtiste.textContent = music[i].artiste;
     activeGoForwards.style.display = "inline";
-    //updating likes..
+      //updating likes..
     musicChoice.forEach((pick)=>{
       loadLoveState(e.target);
       pick.addEventListener("click", (e)=>{
@@ -260,6 +285,7 @@ for(let i=0;i<musicChoice.length;i++){
         nowPlayingDataId = pick.dataset.id;
         loadLoveState(nowPlayingDataId);
         playing();
+        nowPlaying();
       })
     })
     history.pushState({
@@ -275,12 +301,8 @@ function pickedMusicAlready(){
   goAway.forEach((component)=>{
     component.classList.remove("inactive");
   })
-  isPlaying = true; //song.childNodes[3].childNodes[1].classList.remove("song-currently-on");
   container.classList.remove("active");
   container.classList.add("minimize");
-  setTimeout(()=>{
-    container.style.display = "none";
-  }, 500)
 }
 window.addEventListener("popstate", (e)=>{
   if(e.state && e.state.activeMusicContainer){
@@ -335,9 +357,8 @@ function nextTrack(index){
     }
   }else{
     track_index++;
-    
-    isPlaying = false; //nowPlaying(track_index)
-    
+    isPlayingIndex = track_index;
+    nowPlaying();
     loadLoveState(track_index);
     music[index] = music[track_index];
     thumbnail.childNodes[1].src = music[track_index].thumbnail;
@@ -358,9 +379,8 @@ goForwards.addEventListener("click", nextTrack);
 function prevTrack(index){
   if(track_index > 0){
     track_index -= 1;
-    
-    isPlaying = false; //nowPlaying(track_index);
-    
+    isPlayingIndex = track_index;
+    nowPlaying();
     loadLoveState(track_index);
     music[index] = music[track_index];
     thumbnail.childNodes[1].src = music[track_index].thumbnail;
