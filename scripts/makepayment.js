@@ -11,7 +11,7 @@ const btn = document.querySelector("button");
 //going back
 back.addEventListener("click", ()=>{
   setTimeout(()=>{
-    location.href = "/markupL/checkout.html";
+    location.href = "/markupl/checkout.html";
   }, 300)
 })
 
@@ -47,3 +47,4 @@ btn.addEventListener("click", ()=>{
   }, 7000)
 
 })
+
