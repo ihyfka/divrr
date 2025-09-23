@@ -1,3 +1,8 @@
+const loading = document.querySelector(".loading");
+const processSvg = document.querySelector(".process");
+const toHide = document.querySelectorAll(".hide");
+const redirect = document.querySelector(".redirect");
+
 const back = document.querySelector(".svg-container");
 const entry = document.querySelectorAll("#input");
 
@@ -42,9 +47,17 @@ tick.addEventListener("change", function(){
 
 //proceeding
 btn.addEventListener("click", ()=>{
+  toHide.forEach((piece)=>{
+    piece.style.display = "none";
+  })
+  loading.style.display = "flex";
+  setTimeout(()=>{
+    redirect.style.display = "block";
+  }, 2500)
   setTimeout(()=>{
     location.href = "../index.html";
-  }, 7000)
+  }, 5000)
 })
+
 
 
